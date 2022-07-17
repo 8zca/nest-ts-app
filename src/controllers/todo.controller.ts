@@ -7,19 +7,15 @@ import {
   Patch,
   ParseIntPipe,
 } from '@nestjs/common';
-import { TodoService, TodoStatusType } from '@/services/todo';
+import { TodoService } from '@/services/todo';
 import { ValidationPipe } from '@/pipes/validation.pipe';
 import * as Joi from 'joi';
+import { TodoDto } from '@/dtos/todo.dto';
 
 const updateSchema = Joi.object({
   body: Joi.string(),
   status: Joi.any().valid('todo', 'inprogress', 'done'),
 });
-
-class TodoDto {
-  body: string;
-  status: TodoStatusType;
-}
 
 @Controller('todo')
 export class TodoController {
@@ -47,6 +43,6 @@ export class TodoController {
     @Body(new ValidationPipe(updateSchema)) todo: TodoDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return this.todoService.update({ ...todo, id });
+    return this.todoService.update(id, todo);
   }
 }

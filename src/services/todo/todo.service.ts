@@ -1,3 +1,4 @@
+import { TodoDto } from '@/dtos/todo.dto';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { TodoType } from './todo.type';
 
@@ -24,14 +25,14 @@ export class TodoService {
     return this.todos.find((todo) => todo.id === id);
   }
 
-  update(todo: TodoType) {
+  update(id: number, todo: TodoDto) {
     const i = this.todos.findIndex((todo) => todo.id === todo.id);
     if (i < 0) {
       throw new HttpException('not found', HttpStatus.NOT_FOUND);
     }
 
-    this.todos[i].body = todo.body;
-    this.todos[i].status = todo.status;
+    if (todo.body) this.todos[i].body = todo.body;
+    if (todo.status) this.todos[i].status = todo.status;
     return todo;
   }
 }
