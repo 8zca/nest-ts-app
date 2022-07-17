@@ -8,7 +8,6 @@ describe('TodoService', () => {
   beforeEach(async () => {
     const app = await Test.createTestingModule({
       providers: [TodoService],
-      imports: [HttpException],
     }).compile();
 
     service = app.get(TodoService);
