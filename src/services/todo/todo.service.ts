@@ -17,22 +17,18 @@ export class TodoService {
     return this.todos;
   }
 
-  unfinished() {
-    this.todos.filter((todo) => todo.status !== 'done');
-  }
-
   find(id: number) {
     return this.todos.find((todo) => todo.id === id);
   }
 
   update(id: number, todo: TodoDto) {
-    const i = this.todos.findIndex((todo) => todo.id === todo.id);
+    const i = this.todos.findIndex((todo) => todo.id === id);
     if (i < 0) {
       throw new HttpException('not found', HttpStatus.NOT_FOUND);
     }
 
     if (todo.body) this.todos[i].body = todo.body;
     if (todo.status) this.todos[i].status = todo.status;
-    return todo;
+    return this.todos[i];
   }
 }
