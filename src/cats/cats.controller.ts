@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
-import { CatsService } from './cats.service';
+import { Controller, Get, Post, Body } from '@nestjs/common'
+import { CatsService } from './cats.service'
 
 @Controller('cats')
 export class CatsController {
@@ -7,11 +7,11 @@ export class CatsController {
 
   @Get()
   index(): string[] {
-    return this.catsService.findAll();
+    return this.catsService.findAll()
   }
 
   @Post()
   create(@Body() cat: string) {
-    this.catsService.create(cat);
+    this.catsService.create(cat)
   }
 }
