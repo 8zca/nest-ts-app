@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
-import { TodosController } from './todos/todos.controller'
 import { CatsModule } from './cats/cats.module'
-import { DevtoolsModule } from '@nestjs/devtools-integration'
+// import { HandleErrorFilter, UnhandleErrorFilter } from './errors'
 
 @Module({
-  imports: [
-    DevtoolsModule.register({
-      http: process.env.NODE_ENV !== 'production',
-    }),
-    CatsModule,
-  ],
-  controllers: [AppController, TodosController],
-  providers: [AppService],
+  imports: [CatsModule],
+  // providers: [
+  //   {
+  //     provide: APP_FILTER,
+  //     useClass: HandleErrorFilter,
+  //   },
+  //   {
+  //     provide: APP_FILTER,
+  //     useClass: UnhandleErrorFilter,
+  //   },
+  // ],
 })
 export class AppModule {}
